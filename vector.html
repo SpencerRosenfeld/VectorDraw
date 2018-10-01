@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/49006837/Downloads/vector.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 	</head>
 	<body>
@@ -24,7 +23,8 @@
 		<script type="text/javascript">
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
-			var vectorArray = new Array(); 
+			var vectorArray = new Array();
+			var units = "N"
 			addEventListener("keydown", keyDown, true);
 			addEventListener("click", click, true);
 			makeBorders();
@@ -182,32 +182,32 @@
 				var shiftY = 10; 
 			
 				if (angle > 0 && angle <= 45) {
-					ctx.fillText(magnitude + " m/s, " + angle + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
+					ctx.fillText(magnitude + " " + units +", " + angle + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
 				}
 			
 				else if (angle > 45 && angle <= 90) {
-					ctx.fillText(magnitude + " m/s, " + (90-angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
+					ctx.fillText(magnitude + " " + units +", "  + (90-angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
 				}
 
 				else if (angle > 90 && angle <= 135) { 
-					ctx.fillText(magnitude + " m/s, " + (angle-90) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
+					ctx.fillText(magnitude + " " + units +", "  + (angle-90) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
 				}
 			
 				else if (angle > 135 && angle <= 180) { 
-					ctx.fillText(magnitude + " m/s, " + (180-angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
+					ctx.fillText(magnitude +  " " + units +", "  + (180-angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
 				}
 				else if (angle > 180 && angle <= 225) {
-					ctx.fillText(magnitude + " m/s, " + (angle-180) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
+					ctx.fillText(magnitude +  " " + units +", "  + (angle-180) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
 				}
 				else if (angle > 180 && angle <= 270) {
-					ctx.fillText(magnitude + " m/s, " + (270-angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
+					ctx.fillText(magnitude +  " " + units +", "  + (270-angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
 				}
 				else if ( angle > 270 && angle <= 315){
-					ctx.fillText(magnitude + " m/s, " + (angle-270) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
+					ctx.fillText(magnitude +  " " + units +", "  + (angle-270) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
 				}	
 
 				else {
-					ctx.fillText(magnitude + " m/s, " + (315-angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
+					ctx.fillText(magnitude +  " " + units +", "  + (315-angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
 				}	
 			}
 			
