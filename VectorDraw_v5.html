@@ -8,6 +8,18 @@ Created by Spencer Rosenfeld and Marvin Cohen
 -->
 <html>
 	<head>
+		<style>
+			table {
+				font-family: serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			td, th {
+				border: 1px solid black;
+				padding: 4px;
+			}
+		</style>
 	</head>
 	<body>
 		<canvas id="myCanvas" width="800" height="450" style="border:2px solid #FFFFFF;">
@@ -24,8 +36,22 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<br>
 		-->
 		<br>
-		<button onclick="saveImage();">Save image!</button>
-		<button onclick="makeClean();" id="clearButton">Clear</button>
+		<button onclick="makeClean();resetVectorArray();" id="clearButton">Clear</button>
+		<br>
+		<table id="myTable">
+			<tr>
+				<th>Force</th>
+				<th>Force (X components)</th>
+				<th>Force (Y components)</th>
+			</tr>
+			<!--
+			<tr>
+				<td>F(gravity)</td>
+				<td>0 N</td>
+				<td>-9.8 N</td> <!-- placeholder
+			</tr>
+			-->
+		</table>
 		<!--<button onclick="close();">Close</button>
 		-->
 		<script type="text/javascript">
@@ -43,6 +69,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 			function addVector(vector){
 				vectorArray.push(vector);
 			}
+			
 			
 			function removeVector(){
 				newArray = new Array();
@@ -152,7 +179,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 
 				var shiftX = 10; 
 				var shiftY = 10; 
-			
+			/*
 				if (angle > 0 && angle <= 90) {
 					ctx.fillText(magnitude + " N, " + angle + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
 				}
@@ -164,7 +191,33 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				}
 				else {
 					ctx.fillText(magnitude + " N, " + angle + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
-				}	
+				}
+			*/
+				if (angle > 0 && angle <= 45) {
+					ctx.fillText(magnitude + " N, " + angle + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
+				}
+				else if (angle > 45 && angle <= 90) {
+					ctx.fillText(magnitude + " N, " + (90 - angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y - shiftY);
+				}
+				else if (angle > 90 && angle <= 135) { 
+					ctx.fillText(magnitude + " N, " + (angle - 90) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
+				}
+				else if (angle > 135 && angle <= 180) { 
+					ctx.fillText(magnitude + " N, " + (180 - angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y - shiftY);
+				}
+				else if (angle > 180 && angle <= 225) {
+					ctx.fillText(magnitude + " N, " + (angle - 180) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
+				}
+				else if (angle > 225 && angle <= 270) {
+					ctx.fillText(magnitude + " N, " + (270 - angle) + "\u00B0", x + canvas.width / 2 - shiftX, canvas.height / 2 + y + 2 * shiftY);
+				}
+				else if (angle > 270 && angle <= 315) {
+					ctx.fillText(magnitude + " N, " + (angle - 270) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + 2 * shiftY);
+				}
+				else {
+					ctx.fillText(magnitude + " N, " + (360 - angle) + "\u00B0", x + canvas.width / 2 + shiftX, canvas.height / 2 + y + shiftY);
+				}
+
 			}
 			
 			function drawArrowTip(vector) {
@@ -212,7 +265,8 @@ Created by Spencer Rosenfeld and Marvin Cohen
 
 			function drawVectors(){
 				for( var i=0; i < vectorArray.length; i++ ){
-					drawFurthestArc(vectorArray[i]);
+					//drawFurthestArc(vectorArray[i]);
+					drawNearestArc(vectorArray[i]);
 					drawVector(vectorArray[i]);					
 					drawArrowTip(vectorArray[i]);
 					drawLabel(vectorArray[i]);					
@@ -222,7 +276,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 			function makeClean() {
 				clear(); 
 				makeBorders();
-				document.getElementById("clearButton").blur();
+				document.getElementById("clearButton").blur();				
 			}
 			
 			function clear() {
@@ -326,18 +380,40 @@ Created by Spencer Rosenfeld and Marvin Cohen
 					// Use createVector to create a vector Object called spongeBob 
 					var spongeBob = createVector(z / 10, theta);
 					
-					addVector(spongeBob); 					
-					refreshCanvas(); 
-				}
-				
+					addVector(spongeBob); 
+					refreshCanvas();
+
+					var table = document.getElementById("myTable");
+					//var code = 65;
+					var force = z / 10;
+					var forceX = (z / 10) * Math.cos(theta * Math.PI / 180);
+					var forceY = (z / 10) * Math.sin(theta * Math.PI / 180);
+					//var row = table.insertRow(document.getElementById("myTable").rows.length - 1);
+					var row = table.insertRow(1);
+					var cell0 = row.insertCell(0);
+					var cell1 = row.insertCell(1);
+					var cell2 = row.insertCell(2);
+					cell0.innerHTML = (force+0.05).toFixed(1) + " N";
+					cell1.innerHTML = (forceX+.05).toFixed(1) + " N";
+					cell2.innerHTML = (forceY+.05).toFixed(1) + " N";
+				}		
 			}
 			
-			function saveImage() {
-				var imageURL = canvas.toDataURL();
-				var w = window.open("about:blank","Canvas Image");
-				w.document.write("<img src='" + imageURL  + "' />")
+			function resetVectorArray(){
+				vectorArray = new Array();
 			}
-						
+			
+			/*
+			function addEntry() {
+				var table = document.getElementById("myTable");
+				var row = table.insertRow(0);
+				var cell0 = row.insertCell(0);
+				var cell1 = row.insertCell(1);
+				var cell2 = row.insertCell(2);
+				cell0.innerHTML = "NEW CELL1";
+				cell1.innerHTML = "NEW CELL2";
+			}
+			*/
 			
 		</script>
 	</body>
