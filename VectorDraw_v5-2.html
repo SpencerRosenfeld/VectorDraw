@@ -52,7 +52,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<br>
 		<hr>
 		<p>Choose type of vector: 
-			<select id="opt" onchange="switchUnit();">
+			<select id="opt" onchange="switchVector();">
 				<option value="Force">Force</option>
 				<option value="Momentum">Momentum</option>
 				<option value="Velocity">Velocity</option>
@@ -64,9 +64,6 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<table id="myTable" class="table table-bordered">
 			<thead>
 				<tr>
-					<!--<th name="">$\mathrm{Force}\ (\mathrm{N})$</th>
-					<th name="">$\mathrm{Force}_x \ (\mathrm{N})$</th>
-					<th name="">$\mathrm{Force}_y \ (\mathrm{N})$</th> -->
 					<th><strong name="switchtype">Force</strong> (<em name="switchunit">$ \mathrm{N} $</em>)</th>
 					<th><strong name="switchtype">Force</strong>$ _x $ (<em name="switchunit">$ \mathrm{N} $</em>)</th>
 					<th><strong name="switchtype">Force</strong>$ _y $ (<em name="switchunit">$ \mathrm{N} $</em>)</th>
@@ -528,7 +525,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				}
 			}
 			
-			function switchUnit() {
+			function switchVector() {
 				var st = document.getElementsByName("switchtype");
 				var su = document.getElementsByName("switchunit");
 				if (document.getElementById("opt").value == "Momentum") {
