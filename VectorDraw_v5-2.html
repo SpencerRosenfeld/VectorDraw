@@ -49,6 +49,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<button onclick="saveImage();" class="btn btn-success">Save Image</button>
 		<button onclick="makeClean();resetVectorArray();tare();" id="clearButton" class="btn btn-danger">Clear</button>
 		<button onclick="refreshPage();" class="btn btn-info">Refresh</button>
+		<button onlcick="drawAxes?drawAxes=False:drawAxes=True;">Draw Axes on/off</button>
 		<br>
 		<hr>
 		<p>Choose type of vector: 
@@ -88,6 +89,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<!--<button onclick="close();">Close</button>
 		-->
 		<script type="text/javascript">
+			var drawAxes = True;
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
 			var vectorArray = new Array(); 
@@ -363,21 +365,24 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				ctx.strokeStyle = "black";
 				ctx.stroke();
 				
-				// Draw "x"-axis
-				ctx.beginPath();
-				ctx.moveTo(canvas.width / 2, 0);
-				ctx.lineTo(canvas.width / 2, canvas.height);
-				ctx.lineWidth = 2;
-				ctx.closePath();
-				ctx.stroke();
-				
-				// Draw "y"-axis
-				ctx.beginPath();
-				ctx.moveTo(0, canvas.height / 2);
-				ctx.lineTo(canvas.width, canvas.height / 2);
-				ctx.lineWidth = 2;
-				ctx.closePath();
-				ctx.stroke();
+				if( drawAxes == True )
+				{
+					// Draw "x"-axis
+					ctx.beginPath();
+					ctx.moveTo(canvas.width / 2, 0);
+					ctx.lineTo(canvas.width / 2, canvas.height);
+					ctx.lineWidth = 2;
+					ctx.closePath();
+					ctx.stroke();
+
+					// Draw "y"-axis
+					ctx.beginPath();
+					ctx.moveTo(0, canvas.height / 2);
+					ctx.lineTo(canvas.width, canvas.height / 2);
+					ctx.lineWidth = 2;
+					ctx.closePath();
+					ctx.stroke();
+				}
 			}
 
 /* UI Code */ 
