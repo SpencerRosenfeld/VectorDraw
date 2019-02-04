@@ -49,7 +49,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<button onclick="saveImage();" class="btn btn-success">Save Image</button>
 		<button onclick="makeClean();resetVectorArray();tare();" id="clearButton" class="btn btn-danger">Clear</button>
 		<button onclick="refreshPage();" class="btn btn-info">Refresh</button>
-		<button onlcick="drawAxes?drawAxes=False:drawAxes=True;">Draw Axes on/off</button>
+		<button onlcick="drawAxes?drawAxes=False:drawAxes=true;">Draw Axes on/off</button>
 		<br>
 		<hr>
 		<p>Choose type of vector: 
@@ -89,7 +89,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<!--<button onclick="close();">Close</button>
 		-->
 		<script type="text/javascript">
-			var drawAxes = True;
+			var drawAxes = true;
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
 			var vectorArray = new Array(); 
@@ -365,7 +365,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				ctx.strokeStyle = "black";
 				ctx.stroke();
 				
-				if( drawAxes == True )
+				if( drawAxes == true )
 				{
 					// Draw "x"-axis
 					ctx.beginPath();
