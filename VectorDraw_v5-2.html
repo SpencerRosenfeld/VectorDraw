@@ -47,9 +47,9 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		-->
 		<div class="container-fluid">
 		<br>
-		<button onclick="saveImage();" class="btn btn-success">Save Image</button>
+		<button onclick="saveImage();" class="btn btn-success" id="saveButton">Save Image</button>
 		<button onclick="makeClean();resetVectorArray();tare();" id="clearButton" class="btn btn-success">Clear</button>
-		<button onlcick="toggleAxes();" class="btn btn-success">Draw Axes on/off</button>
+		<button onclick="toggleAxes();" class="btn btn-success" id="toggleButton">Toggle Axes on/off</button>
 		<br>
 		<hr>
 		<p>Choose type of vector: 
@@ -624,6 +624,8 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				var imageURL = canvas.toDataURL();
 				var w = window.open("about:blank", "Canvas Image");
 				w.document.write("<img src='" + imageURL  + "' />");
+				
+				document.getElementById("saveButton").blur();
 			}
 			
 			function toggleAxes()
@@ -638,6 +640,8 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				}
 				
 				refreshCanvas();
+				
+				document.getElementById("toggleButton").blur();
 			}
 		</script>
 		
