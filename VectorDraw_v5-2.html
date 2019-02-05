@@ -48,7 +48,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 		<br>
 		<button onclick="saveImage();" class="btn btn-success">Save Image</button>
 		<button onclick="makeClean();resetVectorArray();tare();" id="clearButton" class="btn btn-danger">Clear</button>
-		<button onlcick="drawAxes?drawAxes=False:drawAxes=true;">Draw Axes on/off</button>
+		<button onlcick="toggleAxes();">Draw Axes on/off</button>
 		<br>
 		<hr>
 		<p>Choose type of vector: 
@@ -624,7 +624,20 @@ Created by Spencer Rosenfeld and Marvin Cohen
 				var w = window.open("about:blank", "Canvas Image");
 				w.document.write("<img src='" + imageURL  + "' />");
 			}
-													
+			
+			function toggleAxes()
+			{
+				if( drawAxes )
+				{
+					drawAxes = false;	
+				}
+				else 
+				{
+					drawAxes = true;
+				}
+				
+				refreshCanvas();
+			}
 		</script>
 		
 		<!-- LaTeX script added for degrees symbol -->
@@ -634,7 +647,7 @@ Created by Spencer Rosenfeld and Marvin Cohen
 					inlineMath: [['$','$'], ['\\(','\\)']],
 					processEscapes: true
 				}
-			});
+			});		
 		</script>		
 	</body>
 </html>
